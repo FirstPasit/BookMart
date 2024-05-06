@@ -1,6 +1,6 @@
 package com.example.bookmart.controller;
 
-import com.example.bookmart.file.Product;
+import com.example.bookmart.file.Products;
 import com.example.bookmart.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +17,12 @@ public class ProductController {
     private ProductRepository prodrepo;
 
     @GetMapping("/products")
-    public List<Product> getAllProduct(){
+    public List<Products> getAllProduct(){
         return prodrepo.findAll();
     }
 
     @PostMapping("/products")
-    public Product addProduct(@RequestBody Product product){
+    public Products addProduct(@RequestBody Products product){
         return prodrepo.save(product);
     }
 
@@ -37,11 +37,11 @@ public class ProductController {
     }
 
     @PutMapping("/products/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable("id") String id, @RequestBody Product product){
-        Optional<Product> prodData = prodrepo.findById(id);
+    public ResponseEntity<?> updateProduct(@PathVariable("id") String id, @RequestBody Products product){
+        Optional<Products> prodData = prodrepo.findById(id);
 
         if(prodData.isPresent()){
-            Product changeProduct = prodData.get();
+            Products changeProduct = prodData.get();
             changeProduct.setFullName(product.getFullName());
             changeProduct.setProdType(product.getProdType());
             changeProduct.setPrice(product.getPrice());
@@ -54,7 +54,7 @@ public class ProductController {
 
     }
     @GetMapping("/products/faculty/{faculty}")
-    public List<Product> getProductByFaculty(@PathVariable("faculty") String faculty){
+    public List<Products> getProductByFaculty(@PathVariable("faculty") String faculty){
         return prodrepo.findByFaculty(faculty);
     }
 }

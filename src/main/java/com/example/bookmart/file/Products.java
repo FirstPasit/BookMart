@@ -1,6 +1,5 @@
 package com.example.bookmart.file;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import org.springframework.data.annotation.Id;
@@ -8,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Document (collection = "Products")
-public class Product {
+public class Products {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -17,13 +16,15 @@ public class Product {
     private String prodType;
     private double price;
     private String faculty;
+    private String photoURL;
 
-    public Product(Long id, String fullName, String prodType, double price, String faculty) {
+    public Products(Long id, String fullName, String prodType, double price, String faculty, String photoURL) {
         this.id = id;
         this.fullName = fullName;
         this.prodType = prodType;
         this.price = price;
         this.faculty = faculty;
+        this.photoURL = photoURL;
     }
 
     public Long getId() {
@@ -64,5 +65,13 @@ public class Product {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 }
